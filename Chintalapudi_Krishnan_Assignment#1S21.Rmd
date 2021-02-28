@@ -1,0 +1,79 @@
+---
+title: "MAX-503 Assignment 1"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+1. Create a text vector called Months with names of the 12 months of the year.
+
+```{r}
+Months<-c("January","February","March","April","May","June","July","August","September",
+          "October","November","December")
+Months
+
+```
+
+2. Create a numeric vector Summer, with Calendar month index positions for the
+summer months (inclusive, with 4 elements in all).
+```{r}
+Summer<-c(6,7,8,9)
+```
+
+3. Use vector indexing to extract the text values of Months, indexed by Summer. 
+```{r}
+Months[c(Summer)]
+```
+
+4. Multiply Summer by 3. What are the values of Months, when indexed by Summer
+ multiplied by 3? Why do you get that answer?
+```{r}
+Months[Summer*3]
+```
+We get this output because Summer*3 changes the vector summer to (18,21,24,27) and the vector Months has values only till 12. Hence, returning null values.
+
+
+5. What is the mean(average)summer month, as an integer value? Which value of Months
+corresponds to it? Why do you get that answer?
+```{r}
+Summer_mean<-mean(Summer)
+Summer_mean
+Months[Summer_mean]
+```
+The mean of summer returns 7.5 and by default the index rounds the function down to 0 decimal. So RStudio only considers 7 as the index.
+
+6. Use the floor() and ceiling() functions to return the upper and lower limits of Months for
+the average Summer month. (Hint: to find out how a function works, use R help if
+needed.)
+```{r}
+Months[floor(Summer_mean)]
+Months[ceiling(Summer_mean)]
+```
+
+7. Using the store.df data from Week 2 lecture, how many visits did Bert’s store have? 
+```{r}
+store.num <- factor(c(3, 14, 21, 32, 54))   # store id 
+store.rev <- c(543, 654, 345, 678, 234)   # store revenue, $K 
+store.visits <- c(45, 78, 32, 56, 34)    # visits, 1000s 
+store.manager <- c("Annie", "Bert", "Carla", "Dave", "Ella") 
+(store.df <- data.frame(store.num, store.rev, store.visits, store.manager, stringsAsFactors=F))
+store.df
+summary(store.df)
+
+store.df[2 , 3]
+```
+Bert's store had 78 visits.
+
+8. It is easy to make mistakes in indexing. How can you confirm that the previous answer is
+actually from Bert’s store? Show this with a command that produces
+ no more than 1 row of console output.
+```{r}
+store.df[store.df$store.manager=="Bert","store.visits"]
+```
+ 
+ Installing package to convert to PDF
+```{r}
+tinytex::install_tinytex()
+```
+ 
+ 
